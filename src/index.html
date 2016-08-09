@@ -3,10 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>TodoList like trello</title>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src='./handlebars.js'></script>
         <script defer src='./bundle.js'></script>
     </head>
     <body>
-<!--         <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default">
             <div class="row">
                 <div class="col-md-3 col-md-offset-1">
                     <div class="input-group">
@@ -17,17 +19,20 @@
                     </div>
                 </div>
             </div>
-        </nav> -->
-        <script id="entry-template" type="text/x-handlebars-template">
-            <div class="entry">
-                <h1>{{item.title}}</h1>
-                {{link "Подробнее..." item.url}}
-            </div>
-            <div class="body">
-                {{#bold}}{{body}}{{/bold}}
-            </div>
-        </script>
-        <div class="result"></div>
+        </nav>
+        <div id="content">
+            <!-- Handlebars compile -->
+        </div>
 
+        <script id="template-article" type="text/x-handlebars-template">
+            {{#each boards}}
+            <div class="article">
+                <div class="title">{{title}}</div>
+                <ul>
+                    <li class="task">{{task}}</li>
+                </ul>
+            </div>
+            {{/each}}
+        </script>
     </body>
 </html>

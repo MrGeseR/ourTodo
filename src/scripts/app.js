@@ -1,25 +1,31 @@
-import Handlebars from 'handlebars';
-import $ from 'jquery';
+function getAjax() {
 
-const source = $('#entry-template').html();
-const template = Handlebars.compile(source);
+  var xml = null;
+  try {xml = new XMLHttpRequest(); } catch(e) {}
+  try {xml = new ActiveXObject("Msxml2.XMLHTTP"); } catch(e) {}
+  try {xml = new XMLHttpRequest("Microsoft.XMLHTTP"); } catch(e) {}
 
-const context = {
-  item: {
-    title: "My title",
-    url: "http://www.google.com"
+  return xml;
+}
+
+var xml = getAjax();
+
+xml.open("GET", "../data.json", true);
+xml.onreadystatechange = function() {
+  if(xml.readyState == 4) {
+    if(xml.status == 200) {
+      var json = JSON.parse(xml.responseText);
+      console.log(json);
+      var templateArticle = document.getElementById("template-article").innerHTML,
+          compileTemplate = Handlebars.compile(templateArticle),
+          result = compileTemplate(json),
+          content = document.getElementById("content");
+      content.innerHTML = result;
+
+    }
+    else {
+      alert("Error request: " + xml.status + " " +xml.statusText);
+    }
   }
 };
-
-Handlebars.registerHelper('link', function(text, url){
-  url = Handlebars.escapeExpression(url);
-  text = Handlebars.escapeExpression(text);
-  return new Handlebars.SafeString('<a href=' + url + '>' + text + "</a>");
-});
-$('.result').html(template(context));
-
-Handlebars.registerHelper('bold', function(options) {
-  return '<div class="mybold">' + options.fn(this) + '</div>';
-});
-
-$('.mybold').html(template(bold));
+xml.send(null);

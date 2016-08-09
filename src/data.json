@@ -1,0 +1,16 @@
+{
+  "boards": [
+    {
+      "title":"board1",
+      "task": "DO THIS SHIT!!"
+    },
+    {
+      "title":"board2",
+      "task": "DO it NOW!!!"
+    },
+    {
+      "title":"board3",
+      "task": "JUST... DO IT!"
+    }
+  ]
+}
