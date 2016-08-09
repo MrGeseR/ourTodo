@@ -30,7 +30,7 @@ gulp.task('json', function buildHTML() {
 });
 
 gulp.task('handle', function buildHTML() {
-  return gulp.src('./src/scripts/handlebars.json')
+  return gulp.src('./src/scripts/handlebars.js')
       .pipe(gulp.dest('./public'));
 });
 
