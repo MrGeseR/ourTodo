@@ -4,8 +4,6 @@ const babelify = require('babelify');
 const browserify = require('browserify');
 const stylus = require('gulp-stylus');
 const pug = require('gulp-pug');
-const posthtml = require('gulp-posthtml');
-const posthtmlBEM =  require('posthtml-bem');
 const rename = require('gulp-rename');
 const source = require('vinyl-source-stream');
 const browserSync = require('browser-sync').create();
@@ -22,7 +20,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 
 
 gulp.task('views', function buildHTML() {
-  return gulp.src('./**/*.html')
+  return gulp.src('./src/**/*.html')
       .pipe(gulp.dest('./public'));
 });
 

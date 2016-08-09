@@ -6,7 +6,7 @@
         <script defer src='./bundle.js'></script>
     </head>
     <body>
-        <nav class="navbar navbar-default">
+<!--         <nav class="navbar navbar-default">
             <div class="row">
                 <div class="col-md-3 col-md-offset-1">
                     <div class="input-group">
@@ -17,6 +17,17 @@
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav> -->
+        <script id="entry-template" type="text/x-handlebars-template">
+            <div class="entry">
+                <h1>{{item.title}}</h1>
+                {{link "Подробнее..." item.url}}
+            </div>
+            <div class="body">
+                {{#bold}}{{body}}{{/bold}}
+            </div>
+        </script>
+        <div class="result"></div>
+
     </body>
 </html>
