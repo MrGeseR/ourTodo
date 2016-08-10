@@ -1,31 +1,17 @@
-function getAjax() {
+import $ from 'jquery';
+import Handlebars from 'handlebars';
 
-  var xml = null;
-  try {xml = new XMLHttpRequest(); } catch(e) {}
-  try {xml = new ActiveXObject("Msxml2.XMLHTTP"); } catch(e) {}
-  try {xml = new XMLHttpRequest("Microsoft.XMLHTTP"); } catch(e) {}
 
-  return xml;
-}
 
-var xml = getAjax();
+if ($('.btnAddBoard').click || $($('.list-input').))
 
-xml.open("GET", "../data.json", true);
-xml.onreadystatechange = function() {
-  if(xml.readyState == 4) {
-    if(xml.status == 200) {
-      var json = JSON.parse(xml.responseText);
-      console.log(json);
-      var templateArticle = document.getElementById("template-article").innerHTML,
-          compileTemplate = Handlebars.compile(templateArticle),
-          result = compileTemplate(json),
-          content = document.getElementById("content");
-      content.innerHTML = result;
+$('.btnAddBoard').click(function (){
+    let val = $('.list-input').val();
+    let source   = $('#template-article').html();
+    let template = Handlebars.compile(source);
+    let context = {title: val};
+    let ready = template(context);
+    $('#content').html(ready);
+});
 
-    }
-    else {
-      alert("Error request: " + xml.status + " " +xml.statusText);
-    }
-  }
-};
-xml.send(null);
+
