@@ -1,46 +1,21 @@
 import $ from 'jquery';
-import Handlebars from 'handlebars';
+import createID from './createid';
+import TaskList from './taskList';
 
-class Task {
-    constructor(id,title) {
-        this.id = id;
-        this.title = title;
-        this.init();
-    }
-
-    bindDelete(){
-        this.taskBlock.find('button').click(()=>{
-            this.taskBlock.remove();
-        });
-    }
-    init(){
-        var template = $('#template-article').html(),
-        taskBlockTemplate = Handlebars.compile(template)({
-            'id' : this.id,
-            'title' : this.title
-        });
-        this.taskBlock = $($.parseHTML(taskBlockTemplate));
-
-        $('#content').append(this.taskBlock);
-        this.bindDelete();
-    }
-
-}
-
-
-
-new Task('222', 'Hello');
-new Task('222', 'Hellsaffafaf');
 
 
 
 $('.btnAddBoard').click(function(){
-    new Task('1234', $('.list-input').val());
+    if ($('.list-input').val()) {
+        new TaskList(createID(), $('.list-input').val());
+        $('.list-input').val('');
+    } else{
+        alert('Введите название доски!')
+    }
 });
 
 
 
-// import createID from './createid';
 //
 // var taskListCounter = 0;
 //
