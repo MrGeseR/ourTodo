@@ -1,12 +1,25 @@
-import $ from ;
+import $ from 'jquery';
+import Handlebars from 'handlebars';
 
-class task {
-    constructor (name){
-        this.name = name;
+export default class Task {
+    constructor(id,title) {
+        this.id = id;
+        this.title = title;
+        this.init();
     }
-    del (){
-        $(this.parent().remove(this));
+
+    bindDelete(){
+        this.taskCard.find('.task__delete').click(()=>{
+            this.taskCard.remove();
+        });
     }
+
+    init(){
+        var template = $('#list-template').html(),
+            taskTemplate = Handlebars.compile(template)({
+                'id' : this.id,
+                'title' : this.title
+            });
+        this.taskCard = $($.parseHTML(taskTemplate));
+        this.bindDelete();
 }
-
-export task;

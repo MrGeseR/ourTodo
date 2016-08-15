@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>TodoList like trello</title>
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="style.css">
         <!--<script src='./handlebars.js'></script>-->
         <script defer src='./bundle.js'></script>
@@ -16,7 +17,7 @@
             <div class="row display-width">
                 <div class="col-md-3 col-md-offset-1">
                     <div class="input-group">
-                        <input class="form-control list-input navbar-btn" type='text' placeholder='Натыкай сюда название доски' maxlength='25'>
+                        <input class="form-control list-input navbar-btn" type='text' placeholder='Натыкай сюда название доски' maxlength='15'>
                         <span class="input-group-btn">
                             <button class="btn btn-default navbar-btn btnAddBoard">Добавить</button>
                         </span>
@@ -41,19 +42,20 @@
                 <ul class="list-group sortable">
                 </ul>
                 <div class="addTask thumbnail">
-                    <input class="form-control task-input navbar-btn" type='text' placeholder='Что сделать?' maxlength='25'>
-                    <span class="input-group-btn">
+                    <input class="form-control task-input navbar-btn" type='text' placeholder='Что сделать?' maxlength='15'>
+                    <!--<span class="input-group-btn">-->
                         <button class="btn btn-default navbar-btn btnAddItem">Добавить</button>
-                    </span>
+                    <!--</span>-->
                 </div>
             </div>
-
         </script>
 
-
-
         <script id="list-template" type="text/x-handlebars-template">
-
+            <li data-taskId={{id}} class="task">
+                <i class="fa fa-terminal task__edit" aria-hidden="true"></i>
+                <i class="fa fa-bomb task__delete" aria-hidden="true"></i>
+                <span>{{title}}</span>
+            </li>
         </script>
 
     </body>
