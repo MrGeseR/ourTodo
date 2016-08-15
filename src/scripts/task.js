@@ -2,7 +2,7 @@ import $ from 'jquery';
 import Handlebars from 'handlebars';
 
 export default class Task {
-    constructor(id,title) {
+    constructor(id,title,ui) {
         this.id = id;
         this.title = title;
         this.init();
@@ -14,12 +14,37 @@ export default class Task {
         });
     }
 
-    init(){
+    bindRename() {
+        this.taskCard.find('.task__edit').click(()=>{
+            let text = $(this.taskCard.find('.task__text'));
+            console.log(text.html());
+            text.hide();
+            var editInput = $("<input type='text' id='text' value='"+text.html()+"'>")
+            let confirm  = $('<i class="fa fa-check confirm" aria-hidden="true"></i>');
+            let reject = $('<i class="fa fa-times reject" aria-hidden="true"></i>')
+            text.after(editInput,confirm,reject);
+            confirm.click(function() {
+                let newText = $(editInput).val();
+                text.html(newText);
+                text.show();
+                editInput.remove(),confirm.remove(),reject.remove();
+            })
+            reject.click(function() {
+                text.show();
+                editInput.remove(),confirm.remove(),reject.remove();
+            })
+        });
+    }
+
+    init() {
         var template = $('#list-template').html(),
             taskTemplate = Handlebars.compile(template)({
-                'id' : this.id,
-                'title' : this.title
+                'id': this.id,
+                'title': this.title
             });
         this.taskCard = $($.parseHTML(taskTemplate));
         this.bindDelete();
-}
+        this.bindRename();
+    }
+
+};

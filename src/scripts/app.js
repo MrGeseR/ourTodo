@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import createID from './createid';
 import TaskList from './taskList';
+import ui from 'jquery-ui'
 
 
 
@@ -15,10 +16,11 @@ $('.btnAddBoard').click(function(){
 
 });
 
-$('.btnAddItem').on('click', function(){
-    // if ($(this.parent().child().val())) {
-    console.log($(this.parent()));
-
-});
+ui(function() {
+    $('.list-group').sortable({
+        connectWith: ".sortable",
+        placeholder: 'emptySpace'
+    });
+} )
 
 

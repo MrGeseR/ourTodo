@@ -35,17 +35,14 @@
 
 
         <script id="template-article" type="text/x-handlebars-template">
-
-            <div data-taskListId={{id}} class="article thumbnail">
+            <div data-task-list-id={{id}} class="article thumbnail">
                 <h3 class="listTitle">{{title}}</h3>
                 <span class="destroy">X</span>
                 <ul class="list-group sortable">
                 </ul>
                 <div class="addTask thumbnail">
                     <input class="form-control task-input navbar-btn" type='text' placeholder='Что сделать?' maxlength='15'>
-                    <!--<span class="input-group-btn">-->
-                        <button class="btn btn-default navbar-btn btnAddItem">Добавить</button>
-                    <!--</span>-->
+                        <button id="123" class="btn btn-default navbar-btn btnAddItem">Добавить</button>
                 </div>
             </div>
         </script>
@@ -54,7 +51,7 @@
             <li data-taskId={{id}} class="task">
                 <i class="fa fa-terminal task__edit" aria-hidden="true"></i>
                 <i class="fa fa-bomb task__delete" aria-hidden="true"></i>
-                <span>{{title}}</span>
+                <span class="task__text">{{title}}</span>
             </li>
         </script>
 
