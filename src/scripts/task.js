@@ -17,7 +17,6 @@ export default class Task {
     bindRename() {
         this.taskCard.find('.task__edit').click(()=>{
             let text = $(this.taskCard.find('.task__text'));
-            console.log(text.html());
             text.hide();
             var editInput = $("<input type='text' id='text' value='"+text.html()+"'>");
             let confirm  = $('<i class="fa fa-check confirm" aria-hidden="true"></i>');
