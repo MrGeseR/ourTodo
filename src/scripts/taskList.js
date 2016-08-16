@@ -1,4 +1,4 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 import Handlebars from 'handlebars';
 import Task from './task';
 import createID from './createid';
@@ -9,7 +9,15 @@ export default class TaskList {
         this.title = title;
         this.init();
         this.addTask();
+        this.sort();
 
+    }
+
+    sort(){
+        $('.list-group').sortable({
+            connectWith: '.sortable',
+            placeholder: 'emptySpace'
+        });
     }
 
     bindDelete(){
@@ -17,6 +25,7 @@ export default class TaskList {
             this.taskBlock.remove();
         });
     }
+
     init(){
         var template = $('#template-article').html(),
             taskBlockTemplate = Handlebars.compile(template)({

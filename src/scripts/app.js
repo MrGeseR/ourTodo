@@ -1,4 +1,4 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 import createID from './createid';
 import TaskList from './taskList';
 // import ui from 'jquery-ui'
@@ -15,12 +15,5 @@ $('.btnAddBoard').click(function(){
     }
 
 });
-
-ui(function() {
-    $('.list-group').sortable({
-        connectWith: ".sortable",
-        placeholder: 'emptySpace'
-    });
-} )
 
 

@@ -1,4 +1,4 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 import Handlebars from 'handlebars';
 
 export default class Task {
