@@ -25,6 +25,8 @@ export default class TaskList {
 
     bindDelete(){
         this.taskBlock.find('.destroy').click(()=>{
+            localStorage.removeItem('data-task-list-id/' +this.id+ '');
+            console.log(this.id);
             this.taskBlock.remove();
         });
     }
@@ -85,18 +87,18 @@ export default class TaskList {
             };
         }));
 
-        liToStorage(){
-            let liKey = 'data-task-id/'+this.id;
-            let liValue = ['data-task-list-id/'+this.id;
-            localStorage.setItem(key, value);
-        }();
+    //     liToStorage(){
+    //         let liKey = 'data-task-id/'+this.id;
+    //         let liValue = ['data-task-list-id/'+this.id;
+    //         localStorage.setItem(key, value);
+    //     }();
 
     }
 
-    ulToStorage(){
+    ulToStorage() {
         let key = 'data-task-list-id/'+this.id;
         let value = this.title;
         localStorage.setItem(key, value);
-    }
+    };
 
-}
+};
