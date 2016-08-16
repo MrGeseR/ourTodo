@@ -16,8 +16,10 @@ export default class TaskList {
     sort(){
         $('.list-group').sortable({
             connectWith: '.sortable',
-            placeholder: 'emptySpace'
-        });
+            placeholder: 'emptySpace',
+            revert: true,
+            items: 'li'
+        }).disableSelection();
     }
 
     bindDelete(){
