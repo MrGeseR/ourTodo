@@ -16,8 +16,21 @@ export default class TaskList {
     sort(){
         $('.list-group').sortable({
             connectWith: '.sortable',
-            placeholder: 'emptySpace'
-        });
+            placeholder: 'emptySpace',
+            revert: true,
+            items: 'li',
+            scroll: false,
+            update: function(event, ui) {
+                var changedList = this.id;
+                var order = $(this).sortable('toArray');
+                var positions = order.join(';');
+
+                console.log({
+                    id: changedList,
+                    positions: positions
+                });
+            }
+        }).disableSelection();
     }
 
     bindDelete(){
@@ -47,6 +60,7 @@ export default class TaskList {
             } else {
                 alert ('Натыкай что хочешь сделать!!!');
             }
+            console.log(this.result);
         }));
     }
 
