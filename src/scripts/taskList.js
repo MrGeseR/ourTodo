@@ -10,6 +10,7 @@ export default class TaskList {
         this.init();
         this.addTask();
         this.sort();
+        this.bindRename();
 
     }
 
@@ -37,6 +38,32 @@ export default class TaskList {
         this.taskBlock.find('.destroy').click(()=>{
             this.taskBlock.remove();
         });
+    }
+
+    bindRename(){
+        this.taskBlock.find('.rename').click(()=>{
+            let text = $(this.taskBlock.find('.listTitle'));
+            text.hide();
+            var editInput = $("<input type='text' id='text' value='"+text.html()+"'>");
+            let confirm  = $('<i class="fa fa-check confirm" aria-hidden="true"></i>');
+            let reject = $('<i class="fa fa-times reject" aria-hidden="true"></i>');
+            $('.destroy').hide();
+            $('.rename').hide();
+
+            text.after(editInput,confirm,reject);
+            confirm.click(function() {
+                let newText = $(editInput).val();
+                text.html(newText);
+                text.show();
+                $('.destroy').show(); $('.rename').show();
+                editInput.remove(),confirm.remove(),reject.remove();
+            });
+            reject.click(function() {
+                text.show();
+                $('.destroy').show(); $('.rename').show();
+                editInput.remove(),confirm.remove(),reject.remove();
+            })
+        })
     }
 
     init(){
