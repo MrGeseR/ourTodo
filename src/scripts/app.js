@@ -4,8 +4,6 @@ import TaskList from './taskList';
 // import ui from 'jquery-ui'
 
 
-
-
 $('.btnAddBoard').click(function(){
     if ($('.list-input').val()) {
         new TaskList(createID(), $('.list-input').val());
@@ -15,5 +13,3 @@ $('.btnAddBoard').click(function(){
     }
 
 });
-
-

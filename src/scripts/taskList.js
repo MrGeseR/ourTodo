@@ -7,10 +7,9 @@ export default class TaskList {
     constructor(id,title) {
         this.id = id;
         this.title = title;
+        this.tasks = [];
         this.init();
-        this.addTask();
         this.sort();
-        this.bindRename();
 
     }
 
@@ -21,16 +20,6 @@ export default class TaskList {
             revert: true,
             items: 'li',
             scroll: false,
-            update: function(event, ui) {
-                var changedList = this.id;
-                var order = $(this).sortable('toArray');
-                var positions = order.join(';');
-
-                console.log({
-                    id: changedList,
-                    positions: positions
-                });
-            }
         }).disableSelection();
     }
 
@@ -64,6 +53,7 @@ export default class TaskList {
                 editInput.remove(),confirm.remove(),reject.remove();
             })
         })
+        this.ulToStorage();
     }
 
     init(){
@@ -76,19 +66,37 @@ export default class TaskList {
 
         $('#content').append(this.taskBlock);
         this.bindDelete();
+        this.addTask();
+        this.bindRename();
+        this.ulToStorage();
+
     }
 
-    addTask() {
+    addTask(ID,VALUE) {
         let ui = $('[data-task-list-id=' + this.id + ']');
         $(ui.find('.btnAddItem').click(() => {
-            if ($(ui.find('.task-input')).val()) {
+            if(ID && VALUE){
+                $(ui.find('.list-group')).append(new Task(ID, VALUE).taskCard)
+            } else if ($(ui.find('.task-input')).val()) {
                 $(ui.find('.list-group')).append(new Task(createID(), $(ui.find('.task-input')).val()).taskCard);
                 $(ui.find('.task-input')).val('');
             } else {
                 alert ('Натыкай что хочешь сделать!!!');
-            }
-            console.log(this.result);
+            };
         }));
+
+        liToStorage(){
+            let liKey = 'data-task-id/'+this.id;
+            let liValue = ['data-task-list-id/'+this.id;
+            localStorage.setItem(key, value);
+        }();
+
+    }
+
+    ulToStorage(){
+        let key = 'data-task-list-id/'+this.id;
+        let value = this.title;
+        localStorage.setItem(key, value);
     }
 
 }

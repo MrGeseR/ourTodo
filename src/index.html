@@ -51,10 +51,10 @@
         </script>
 
         <script id="list-template" type="text/x-handlebars-template">
-            <li data-taskId={{id}} class="task">
+            <li data-task-id={{id}} class="task">
+                <span class="task__text">{{title}}</span>
                 <i class="fa fa-terminal task__edit" aria-hidden="true"></i>
                 <i class="fa fa-bomb task__delete" aria-hidden="true"></i>
-                <span class="task__text">{{title}}</span>
             </li>
         </script>
 
