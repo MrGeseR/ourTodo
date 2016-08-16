@@ -24,8 +24,8 @@ gulp.task('views', function buildHTML() {
       .pipe(gulp.dest('./public'));
 });
 
-gulp.task('json', function buildHTML() {
-  return gulp.src('./src/**/*.json')
+gulp.task('jquery', function buildHTML() {
+  return gulp.src('./*.js')
       .pipe(gulp.dest('./public'));
 });
 
@@ -91,7 +91,7 @@ gulp.task('build', gulp.series(
     'clean',
     gulp.parallel(
         'views',
-        'json',
+        'jquery',
         'handle',
         'styles',
         'scripts'

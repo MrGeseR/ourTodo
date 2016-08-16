@@ -36,7 +36,7 @@ export default class Task {
                 text.show();
                 $('.task__edit').show(); $('.task__delete').show();
                 editInput.remove(),confirm.remove(),reject.remove();
-            })
+            });
         });
     }
 
