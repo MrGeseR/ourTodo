@@ -19,18 +19,23 @@ export default class Task {
             let text = $(this.taskCard.find('.task__text'));
             console.log(text.html());
             text.hide();
-            var editInput = $("<input type='text' id='text' value='"+text.html()+"'>")
+            var editInput = $("<input type='text' id='text' value='"+text.html()+"'>");
             let confirm  = $('<i class="fa fa-check confirm" aria-hidden="true"></i>');
-            let reject = $('<i class="fa fa-times reject" aria-hidden="true"></i>')
+            let reject = $('<i class="fa fa-times reject" aria-hidden="true"></i>');
+            $('.task__edit').hide();
+            $('.task__delete').hide();
+
             text.after(editInput,confirm,reject);
             confirm.click(function() {
                 let newText = $(editInput).val();
                 text.html(newText);
                 text.show();
+                $('.task__edit').show(); $('.task__delete').show();
                 editInput.remove(),confirm.remove(),reject.remove();
-            })
+            });
             reject.click(function() {
                 text.show();
+                $('.task__edit').show(); $('.task__delete').show();
                 editInput.remove(),confirm.remove(),reject.remove();
             })
         });
