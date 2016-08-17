@@ -7,7 +7,6 @@ export default class TaskList {
     constructor(id,title) {
         this.id = id;
         this.title = title;
-        this.tasks = [];
         this.init();
         this.sort();
         var self = this;
