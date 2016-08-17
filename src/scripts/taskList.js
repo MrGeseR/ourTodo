@@ -26,7 +26,7 @@ export default class TaskList {
     bindDelete(){
         this.taskBlock.find('.destroy').click(()=>{
             localStorage.removeItem('data-task-list-id/' +this.id+ '');
-            console.log(this.id);
+            // console.log(this.id);
             this.taskBlock.remove();
         });
     }
@@ -42,9 +42,11 @@ export default class TaskList {
             $('.rename').hide();
 
             text.after(editInput,confirm,reject);
-            confirm.click(function() {
+            confirm.click(() => {
                 let newText = $(editInput).val();
                 text.html(newText);
+                let tmpId = this.id;
+                localStorage.setItem('data-task-list-id/' + tmpId,newText);
                 text.show();
                 $('.destroy').show(); $('.rename').show();
                 editInput.remove(),confirm.remove(),reject.remove();
@@ -75,24 +77,21 @@ export default class TaskList {
     }
 
     addTask(ID,VALUE) {
-        let ui = $('[data-task-list-id=' + this.id + ']');
+        let ui = $("[data-task-list-id=" + this.id + "]");
         $(ui.find('.btnAddItem').click(() => {
-            if(ID && VALUE){
-                $(ui.find('.list-group')).append(new Task(ID, VALUE).taskCard)
-            } else if ($(ui.find('.task-input')).val()) {
-                $(ui.find('.list-group')).append(new Task(createID(), $(ui.find('.task-input')).val()).taskCard);
-                $(ui.find('.task-input')).val('');
+            let Id = ID||createID();
+            let Value = VALUE||$(ui.find('.task-input')).val();
+            if(Id && Value){
+                $(ui.find('.list-group')).append(new Task(Id, Value).taskCard)
             } else {
                 alert ('Натыкай что хочешь сделать!!!');
-            };
-        }));
+            }
 
-    //     liToStorage(){
-    //         let liKey = 'data-task-id/'+this.id;
-    //         let liValue = ['data-task-list-id/'+this.id;
-    //         localStorage.setItem(key, value);
-    //     }();
-
+            $(ui.find('.task-input')).val('');
+            let liKey = 'data-task-id/'+Id;
+            let liValue = ['data-task-list-id/'+this.id, Value];
+            localStorage.setItem(liKey, liValue);
+            }));
     }
 
     ulToStorage() {

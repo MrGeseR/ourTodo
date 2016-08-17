@@ -9,7 +9,6 @@ import TaskList from './taskList';
       var key = localStorage.key(i);
       if(key.slice(0,17) == "data-task-list-id"){
         new TaskList(key.slice(18), localStorage.getItem(key));
-        console.log(key.slice(18));
       }
       else 
         console.log("goodbye");
