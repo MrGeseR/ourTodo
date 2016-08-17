@@ -6,6 +6,7 @@ export default class Task {
         this.id = id;
         this.title = title;
         this.init();
+        this.ul=ui;
     }
 
     bindDelete(){
@@ -25,12 +26,13 @@ export default class Task {
             $('.task__delete').hide();
 
             text.after(editInput,confirm,reject);
-            confirm.click(function() {
+            confirm.click(() => {
                 let newText = $(editInput).val();
                 text.html(newText);
                 text.show();
                 $('.task__edit').show(); $('.task__delete').show();
                 editInput.remove(),confirm.remove(),reject.remove();
+                localStorage.setItem('data-task-id/'+this.id, ['data-task-list-id/'+this.ul, newText]);
             });
             reject.click(function() {
                 text.show();

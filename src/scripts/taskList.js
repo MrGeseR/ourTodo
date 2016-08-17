@@ -10,7 +10,7 @@ export default class TaskList {
         this.tasks = [];
         this.init();
         this.sort();
-
+        var self = this;
     }
 
     sort(){
@@ -25,6 +25,7 @@ export default class TaskList {
 
     bindDelete(){
         this.taskBlock.find('.destroy').click(()=>{
+            localStorage.removeItem('data-task-list-id/' +this.id+ '');
             this.taskBlock.remove();
         });
     }
@@ -40,20 +41,20 @@ export default class TaskList {
             $('.rename').hide();
 
             text.after(editInput,confirm,reject);
-            confirm.click(function() {
+            confirm.click(() => {
                 let newText = $(editInput).val();
                 text.html(newText);
                 text.show();
                 $('.destroy').show(); $('.rename').show();
                 editInput.remove(),confirm.remove(),reject.remove();
+                localStorage.setItem('data-task-list-id/'+this.id, newText);
             });
             reject.click(function() {
                 text.show();
                 $('.destroy').show(); $('.rename').show();
                 editInput.remove(),confirm.remove(),reject.remove();
             })
-        })
-        this.ulToStorage();
+        });
     }
 
     init(){
@@ -70,15 +71,17 @@ export default class TaskList {
         this.bindRename();
         this.ulToStorage();
 
+
     }
 
     addTask(ID,VALUE) {
+        var ul = this.id;
         let ui = $('[data-task-list-id=' + this.id + ']');
         $(ui.find('.btnAddItem').click(() => {
             let Id = ID||createID();
             let Value = VALUE||$(ui.find('.task-input')).val();
             if(Id && Value){
-                $(ui.find('.list-group')).append(new Task(Id, Value).taskCard)
+                $(ui.find('.list-group')).append(new Task(Id, Value, ul).taskCard)
             } else {
                 alert ('Натыкай что хочешь сделать!!!');
             }
@@ -91,10 +94,16 @@ export default class TaskList {
             }));
     }
 
-    ulToStorage(){
+    ulToStorage() {
         let key = 'data-task-list-id/'+this.id;
         let value = this.title;
         localStorage.setItem(key, value);
+        console.log('saved')
+    };
+
+    ulDeleteFromStorage(){
+        let key = 'data-task-list-id/'+this.id;
+        localStorage.removeItem(key);
     }
 
-}
+};
