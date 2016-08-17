@@ -12,6 +12,7 @@ export default class Task {
     bindDelete(){
         this.taskCard.find('.task__delete').click(()=>{
             this.taskCard.remove();
+            localStorage.removeItem('data-task-id/'+this.id);
         });
     }
 

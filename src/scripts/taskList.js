@@ -98,7 +98,6 @@ export default class TaskList {
         let key = 'data-task-list-id/'+this.id;
         let value = this.title;
         localStorage.setItem(key, value);
-        console.log('saved')
     };
 
     ulDeleteFromStorage(){
