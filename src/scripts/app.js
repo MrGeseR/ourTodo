@@ -5,13 +5,17 @@ import TaskList from './taskList';
 
 (function(){
   if(localStorage.length>0){
-    for (var i = 0; i < localStorage.length; i++) {
+    for (var i = localStorage.length -1; i >= 0; i--) {
       var key = localStorage.key(i);
       if(key.slice(0,17) == "data-task-list-id"){
         new TaskList(key.slice(18), localStorage.getItem(key));
       }
-      else 
-        console.log("goodbye");
+      else {
+        let qwe = localStorage.getItem(key).slice(18,26);
+        console.log(qwe);
+        let rty = $('[data-task-list-id='+qwe+']').find('.list-group');
+        rty.addTask(key, localStorage.getItem(key).slice(27));
+      }
     }
   };
 }());
