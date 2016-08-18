@@ -7,7 +7,6 @@ export default class TaskList {
     constructor(id,title) {
         this.id = id;
         this.title = title;
-        this.tasks = [];
         this.init();
         this.sort();
         var self = this;
@@ -69,30 +68,30 @@ export default class TaskList {
 
         $('#content').append(this.taskBlock);
         this.bindDelete();
-        this.addTask();
         this.bindRename();
         this.ulToStorage();
-
-
+        this.taskBlock.find('.btnAddItem').click(()=> {
+            return this.addTask()
+        });
     }
+
 
     addTask(ID,VALUE) {
         var ul = this.id;
         let ui = $('[data-task-list-id=' + this.id + ']');
-        $(ui.find('.btnAddItem').click(() => {
-            let Id = ID||createID();
-            let Value = VALUE||$(ui.find('.task-input')).val();
-            if(Id && Value){
-                $(ui.find('.list-group')).append(new Task(Id, Value, ul).taskCard)
-            } else {
-                alert ('Натыкай что хочешь сделать!!!');
-            }
 
-            $(ui.find('.task-input')).val('');
-            let liKey = 'data-task-id/'+Id;
-            let liValue = ['data-task-list-id/'+this.id, Value];
-            localStorage.setItem(liKey, liValue);
-            }));
+        let Id = ID||createID();
+        let Value = VALUE||$(ui.find('.task-input')).val();
+        if(Id && Value){
+            $(ui.find('.list-group')).append(new Task(Id, Value, ul).taskCard)
+        } else {
+            alert ('Натыкай что хочешь сделать!!!');
+        }
+        $(ui.find('.task-input')).val('');
+        let liKey = 'data-task-id/'+Id;
+        let liValue = ['data-task-list-id/'+this.id, Value];
+        localStorage.setItem(liKey, liValue);
+
     }
 
     ulToStorage() {
